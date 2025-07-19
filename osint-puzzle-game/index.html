@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Investigation Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="screen active">
+        <div class="container">
+            <div class="welcome-content">
+                <h1>OSINT Investigation Game</h1>
+                <div class="osint-intro">
+                    <h2>What is OSINT?</h2>
+                    <p>Open-Source Intelligence (OSINT) is the practice of collecting and analyzing publicly available information to gather intelligence. This game teaches you essential OSINT techniques through hands-on investigations.</p>
+                    
+                    <div class="techniques-grid">
+                        <div class="technique-card">
+                            <h3>🔍 Image Analysis</h3>
+                            <p>Reverse image search and metadata extraction</p>
+                        </div>
+                        <div class="technique-card">
+                            <h3>👤 Social Media Intel</h3>
+                            <p>Username tracking and profile analysis</p>
+                        </div>
+                        <div class="technique-card">
+                            <h3>🌐 Domain Investigation</h3>
+                            <p>Website ownership and infrastructure analysis</p>
+                        </div>
+                        <div class="technique-card">
+                            <h3>📍 Geolocation</h3>
+                            <p>Finding locations from visual clues</p>
+                        </div>
+                    </div>
+
+                    <div class="ethical-notice">
+                        <h3>⚖️ Ethical Guidelines</h3>
+                        <p>Always use OSINT techniques responsibly and legally. Respect privacy, follow platform terms of service, and never engage in stalking or harassment.</p>
+                    </div>
+                </div>
+                
+                <button class="btn btn--primary btn--lg" onclick="showLevelSelect()">Start Investigation</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Level Selection Screen -->
+    <div id="level-select-screen" class="screen">
+        <div class="container">
+            <div class="level-select-header">
+                <h1>Choose Your Investigation</h1>
+                <div class="progress-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="total-score">0</span>
+                        <span class="stat-label">Total Score</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="levels-completed">0</span>
+                        <span class="stat-label">Levels Completed</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="achievements-earned">0</span>
+                        <span class="stat-label">Achievements</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="levels-grid" id="levels-grid">
+                <!-- Levels will be populated by JavaScript -->
+            </div>
+
+            <div class="achievements-section">
+                <h2>Achievements</h2>
+                <div class="achievements-grid" id="achievements-grid">
+                    <!-- Achievements will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+        <div class="game-layout">
+            <!-- Game Header -->
+            <header class="game-header">
+                <div class="level-info">
+                    <span class="level-title" id="current-level-title">Level 1</span>
+                    <span class="difficulty-badge" id="current-difficulty">Beginner</span>
+                </div>
+                <div class="game-stats">
+                    <div class="stat">
+                        <span id="current-score">0</span>
+                        <small>Score</small>
+                    </div>
+                    <div class="stat">
+                        <span id="timer">00:00</span>
+                        <small>Time</small>
+                    </div>
+                </div>
+                <button class="btn btn--secondary" onclick="showLevelSelect()">Exit Level</button>
+            </header>
+
+            <!-- Main Game Area -->
+            <div class="game-main">
+                <!-- Scenario Panel -->
+                <div class="scenario-panel">
+                    <div class="scenario-content">
+                        <h2>Investigation Brief</h2>
+                        <p id="scenario-text">Loading scenario...</p>
+                        <div class="scenario-image" id="scenario-image">
+                            <!-- Image will be shown here if available -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions Panel -->
+                <div class="questions-panel">
+                    <h3>Investigation Questions</h3>
+                    <div id="questions-container">
+                        <!-- Questions will be populated by JavaScript -->
+                    </div>
+                    <button class="btn btn--primary btn--full-width" id="submit-answers" onclick="submitAnswers()">Submit Investigation</button>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="game-sidebar">
+                <!-- OSINT Tools -->
+                <div class="tools-section">
+                    <h3>OSINT Tools</h3>
+                    <div class="tools-grid" id="tools-grid">
+                        <!-- Tools will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Notebook -->
+                <div class="notebook-section">
+                    <h3>Investigation Notes</h3>
+                    <textarea id="notebook" placeholder="Take notes about your investigation here...&#10;&#10;• Key findings&#10;• Suspicious details&#10;• Tool results&#10;• Next steps"></textarea>
+                    <button class="btn btn--secondary btn--sm" onclick="clearNotes()">Clear Notes</button>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="results-screen" class="screen">
+        <div class="container">
+            <div class="results-content">
+                <div class="results-header">
+                    <h1 id="results-title">Investigation Complete!</h1>
+                    <div class="final-score">
+                        <span class="score-value" id="final-score">0</span>
+                        <span class="score-label">Final Score</span>
+                    </div>
+                </div>
+
+                <div class="results-details" id="results-details">
+                    <!-- Results will be populated by JavaScript -->
+                </div>
+
+                <div class="educational-content" id="educational-content">
+                    <h2>What You Learned</h2>
+                    <div class="techniques-used" id="techniques-used">
+                        <!-- Educational content will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button class="btn btn--primary" onclick="nextLevel()">Next Level</button>
+                    <button class="btn btn--secondary" onclick="retryLevel()">Retry Level</button>
+                    <button class="btn btn--outline" onclick="showLevelSelect()">Level Select</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OSINT Tool Modals -->
+    <div id="tool-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="tool-modal-title">OSINT Tool</h2>
+                <button class="modal-close" onclick="closeToolModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="tool-modal-body">
+                <!-- Tool interface will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Hint Modal -->
+    <div id="hint-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Investigation Hint</h2>
+                <button class="modal-close" onclick="closeHintModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="hint-text"></p>
+                <div class="hint-cost">
+                    <small>Hint Cost: -10 points</small>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn--primary" onclick="acceptHint()">Use Hint</button>
+                <button class="btn btn--secondary" onclick="closeHintModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

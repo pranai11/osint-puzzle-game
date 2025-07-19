@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSINT Story Puzzle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- THEME TOGGLE (fixed bottom-right) -->
+  <button id="theme-toggle" class="btn btn--sm btn--outline theme-toggle" aria-label="Toggle dark / light mode">🌙</button>
+
+  <!-- START SCREEN -->
+  <section id="start-screen" class="screen active flex flex-col items-center justify-center gap-16 px-16 text-center">
+    <h1 class="title">OSINT Story Puzzle</h1>
+    <p class="intro">Learn open-source-intelligence by solving interactive investigations. Progress is kept only during this visit.</p>
+    <div class="flex gap-8">
+      <button id="btn-new"       class="btn btn--primary"   onclick="window.startNewGame()">New Game</button>
+      <button id="btn-continue"  class="btn btn--secondary" onclick="window.showLevelSelect()">Continue</button>
+      <button id="btn-levels"    class="btn btn--outline"   onclick="window.showLevelSelect()">Levels</button>
+    </div>
+  </section>
+
+  <!-- LEVEL SELECT -->
+  <section id="level-screen" class="screen container py-16">
+    <h2 class="mb-8">Select Level</h2>
+    <div id="level-list" class="level-list"></div>
+  </section>
+
+  <!-- GAME SCREEN -->
+  <section id="game-screen" class="screen container py-16">
+    <h2 id="game-title" class="mb-16"></h2>
+    <div class="game-flex">
+      <!-- Narrative column -->
+      <div class="narrative">
+        <p id="game-narrative"></p>
+        <img id="game-image" class="game-image mt-8" alt="Investigation visual" />
+      </div>
+      <!-- Tabbed panel -->
+      <div class="panel">
+        <nav class="tab-nav">
+          <button class="tab-btn active" data-tab="tools">Tools</button>
+          <button class="tab-btn" data-tab="notebook">Notebook</button>
+          <button class="tab-btn" data-tab="hints">Hints</button>
+          <button class="tab-btn" data-tab="submit">Submit</button>
+        </nav>
+        <div id="tab-tools"   class="tab"></div>
+        <div id="tab-notebook" class="tab hidden"><textarea id="notebook" class="form-control" rows="12" aria-label="Notebook"></textarea></div>
+        <div id="tab-hints"    class="tab hidden"></div>
+        <div id="tab-submit"   class="tab hidden"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- END SCREEN -->
+  <section id="end-screen" class="screen flex flex-col items-center justify-center text-center gap-8 px-16">
+    <h2>All Cases Closed!</h2>
+    <p id="final-rank"></p>
+    <button id="btn-restart" class="btn btn--primary" onclick="window.restartGame()">Restart</button>
+  </section>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
